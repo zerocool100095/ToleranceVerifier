@@ -1,0 +1,57 @@
+I have data from a calibration certificate that shows what parameters were tested for a {{manufacturer}} {{model}}. This certificate data is provided ONLY TO HELP YOU UNDERSTAND what parameters we need specifications for.
+
+IMPORTANT: The certificate data below is NOT to be used as reference or truth - it simply shows what parameters we need to find specifications for.
+
+CERTIFICATE DATA:
+```json
+{{certificate_data}}
+```
+
+YOUR TASK: Find the correct manufacturer specifications for this instrument that should have been used during calibration.
+
+I have obtained specifications from two different sources. You must analyze both sources to determine which provides the most accurate and authoritative information for each parameter in the certificate.
+
+PRIORITY ORDER FOR SOURCES (MOST TO LEAST AUTHORITATIVE):
+1. MANUAL EXTRACTION - Specifications taken directly from manufacturer manuals/datasheets (ALWAYS PREFER THESE)
+2. AI RESEARCH - Specifications researched from general sources
+
+SPECIFICATIONS FROM MANUAL EXTRACTION (PRIMARY SOURCE):
+```
+{{manual_specs}}
+```
+
+SPECIFICATIONS FROM AI RESEARCH (SECONDARY SOURCE):
+```
+{{ai_specs}}
+```
+
+ANALYSIS INSTRUCTIONS:
+1. For each parameter in the certificate data (temperature, humidity, etc.), identify the corresponding specifications in both sources
+2. STRONGLY PREFER the Manual Extraction specifications when available and applicable
+3. Only use AI Research specifications when manual specifications are missing, unclear, or don't cover a specific parameter
+4. If there are contradictions, document them and explain your reasoning for your final choice
+5. Focus specifically on accuracy/tolerance specifications that relate to the parameters tested in the certificate
+
+OUTPUT FORMAT:
+Provide a structured JSON output with the following format:
+{
+  "manufacturer": "{{manufacturer}}",
+  "model": "{{model}}",
+  "equipment_type": "{{equipment_type}}",
+  "specifications": {
+    // Structured specifications grouped by parameter types
+    // Each parameter should include at minimum:
+    // - ranges
+    // - tolerances/accuracies
+    // - resolutions (if available)
+  },
+  "spec_source": "Detailed description of where these specifications came from, including specific manual/datasheet names and page numbers if available",
+  "confidence_score": // Number between 0-1 indicating confidence in these specifications,
+  "source_analysis": "Detailed explanation of which specifications came from which source and WHY manual specs were preferred (or why AI specs were used if manual specs were insufficient)"
+}
+
+CRITICAL REQUIREMENTS:
+1. NEVER use certificate data as reference specifications - it's only showing what parameters to look for
+2. ALWAYS prefer manual extraction specs over AI research when available
+3. Return specifications that would be relevant for VERIFYING the calibration of the parameters shown in the certificate
+4. Provide comprehensive source analysis explaining why you chose each specification
